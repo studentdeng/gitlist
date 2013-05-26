@@ -1,0 +1,33 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-03-18 00:10:30 --> Severity: Notice  --> Undefined property: Account::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 14:50:13 --> Severity: Notice  --> Undefined property: Store_buy::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 14:50:23 --> Severity: Notice  --> Undefined property: Store_buy::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:01:59 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:01:59 --> Severity: Notice  --> Undefined variable: DB_store /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/controllers/api/excel.php 26
+ERROR - 2013-03-18 15:02:39 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:04:58 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:05:24 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:07:32 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:19:30 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:19:56 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:20:25 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:20:42 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:21:14 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:38:27 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:38:41 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:47:22 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 15:49:43 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:07:25 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:14:04 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:16:03 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:16:16 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:28:57 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:29:44 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:33:46 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:34:12 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:34:30 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:34:44 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:36:19 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:36:29 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247
+ERROR - 2013-03-18 16:36:30 --> Severity: Notice  --> Undefined property: Excel::$db /Applications/XAMPP/xamppfiles/htdocs/td_zerodesign/application/libraries/REST_Controller.php 247

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <title>进度管理 beta</title>
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/json-to-table.js"></script>
+        <script type="text/javascript" src="js/jquery.paging.min.js"></script>
+        <script type="text/javascript" src="js/jquery.jqpagination.js"></script>
+        <script type="text/javascript" src="js/curer.js"></script>
+        <script type="text/javascript" src="js/Chart.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap -->
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+        <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="css/jqpagination.css" rel="stylesheet" media="screen">
+        <style>
+            body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="#">进度管理 beta</a>
+                </div>
+            </div>
+        </div>
+        <div class ="container">
+            <ul class="nav nav-tabs" id = 'myTab'>
+                <li class="active"><a href="#add" data-toggle="tab">addition</a></li>
+                <li><a href="#evaluation" data-toggle="tab">Evaluation</a></li>
+                <li><a href="#progress" data-toggle="tab">Progress</a></li>
+                <li><a href="#event" data-toggle="tab">Event</a></li>
+                <li><a href="#chart" data-toggle="tab">Chart</a></li>
+            </ul>
+
+            <div class ="tab-content">
+                <div class="tab-pane active" id="add">
+                    <select name="plan_id" id="selectPlanId">    
+                        <option value="2">健身</option>   
+                        <option value="1">英语</option>
+                        <option value="3">测试</option>
+                    </select>  
+                    <p><input name="cost_time_min" type="text" 
+                              placeholder="请输入时间(分钟)" 
+                              value id='costTimeMin'></p>
+
+                    <a class="btn btn-success" onclick="submitAdd()">add</a>
+                </div>
+
+                <div class="tab-pane" id="evaluation">
+                    <select name="plan_id" id="selectPlanId2" onchange="evaluation_change()">  
+                        <option value="2">健身</option>   
+                        <option value="1">英语</option>
+                        <option value="3">测试3</option>  
+                    </select>
+                    <div id ="evaluation_box">
+
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="progress">
+                    <div id ='progress_box'>
+
+                    </div>
+
+                    <div class="pagination">
+                        <a href="#" class="first" data-action="first">&laquo;</a>
+                        <a href="#" class="previous" data-action="previous">&lsaquo;</a>
+                        <input type="text" readonly="readonly" data-max-page="40" />
+                        <a href="#" class="next" data-action="next">&rsaquo;</a>
+                        <a href="#" class="last" data-action="last">&raquo;</a>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="event">
+                    <select name="plan_id" id="event_select">  
+                        <option value="2">健身</option>   
+                        <option value="1">英语</option>
+                        <option value="3">测试3</option>  
+                    </select>
+                    <p><input name="name" type="text" placeholder="未完成原因" value id='eventName'></p>
+                    <a class="btn btn-success" onclick="event_submitAdd()">add</a>
+                </div>
+
+                <div class="tab-pane" id="chart">
+                    <p><font style="color:rgb(220,220,220)">健身(分钟)</font></p>
+                    <p><font style="color:rgb(151,187,205)">听写(分钟)</font></p>
+                    <canvas id="canvas" height="450" width="2000"></canvas>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

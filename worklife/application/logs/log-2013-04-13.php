@@ -1,0 +1,35 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-04-13 08:20:10 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 08:21:32 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 09:06:33 --> Severity: Notice  --> Undefined property: File::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 09:06:35 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:17:32 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:41:52 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:43:05 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:44:07 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:44:17 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 22:44:33 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:13:15 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:13:51 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:13:56 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:14:38 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:16:07 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:19:06 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:19:55 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:20:12 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:20:58 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:25:54 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:25:55 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:25:57 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:27:46 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:28:00 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:45:13 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:45:19 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:47:10 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:47:23 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:48:47 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:49:31 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:49:48 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:50:45 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
+ERROR - 2013-04-13 23:50:48 --> Severity: Notice  --> Undefined property: Progress::$db /Applications/XAMPP/xamppfiles/htdocs/curer/application/libraries/REST_Controller.php 247
