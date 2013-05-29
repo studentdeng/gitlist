@@ -6,39 +6,6 @@ use Gitter\Client as BaseClient;
 
 class Client extends BaseClient
 {
-    protected $default_branch;
-
-    public function __construct($options = null)
-    {
-        parent::__construct($options);
-
-        if (!isset($options['default_branch'])) {
-            $options['default_branch'] = 'master';
-        }
-
-        $this->setDefaultBranch($options['default_branch']);
-    }
-
-    /**
-     * Set default branch as a string.
-     *
-     * @param string $branch Name of branch to use when repo's HEAD is detached.
-     */
-    protected function setDefaultBranch($branch)
-    {
-        $this->default_branch = $branch;
-
-        return $this;
-    }
-
-    /**
-     * Return name of default branch as a string.
-     */
-    public function getDefaultBranch()
-    {
-        return $this->default_branch;
-    }
-
     /**
      * Creates a new repository on the specified path
      *
@@ -57,17 +24,13 @@ class Client extends BaseClient
     }
 
     /**
-     * Opens a specified repository
+     * Opens a repository at the specified path
      *
-     * @param  array      $repos Array of items describing configured repositories
-     * @param  string     $repo  Name of repository we are currently handling
+     * @param  string     $path Path where the repository is located
      * @return Repository Instance of Repository
      */
-    public function getRepository($repos, $repo)
+    public function getRepository($path)
     {
-        $repotmp = $this->getRepositoryCached($repos, $repo);
-        $path = $repotmp->getPath();
-
         if (!file_exists($path) || !file_exists($path . '/.git/HEAD') && !file_exists($path . '/HEAD')) {
             throw new \RuntimeException('There is no GIT repository at ' . $path);
         }
@@ -79,4 +42,3 @@ class Client extends BaseClient
         return new Repository($path, $this);
     }
 }
-

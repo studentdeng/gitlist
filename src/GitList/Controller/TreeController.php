@@ -4,6 +4,8 @@ namespace GitList\Controller;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
+use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,15 +15,11 @@ class TreeController implements ControllerProviderInterface
     {
         $route = $app['controllers_factory'];
 
-        $route->get('{repo}/tree/{commitishPath}/', $treeController = function ($repo, $commitishPath = '') use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
-            if (!$commitishPath) {
-                $commitishPath = $repository->getHead();
+        $route->get('{repo}/tree/{branch}/{tree}/', $treeController = function($repo, $branch = '', $tree = '') use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
+            if (!$branch) {
+                $branch = $repository->getHead();
             }
-
-            list($branch, $tree) = $app['util.routing']->parseCommitishPathParam($commitishPath, $repo);
-
-            list($branch, $tree) = $app['util.repository']->extractRef($repository, $branch, $tree);
             $files = $repository->getTree($tree ? "$branch:\"$tree\"/" : $branch);
             $breadcrumbs = $app['util.view']->getBreadcrumbs($tree);
 
@@ -41,21 +39,22 @@ class TreeController implements ControllerProviderInterface
                 'breadcrumbs'    => $breadcrumbs,
                 'branches'       => $repository->getBranches(),
                 'tags'           => $repository->getTags(),
-                'readme'         => $app['util.repository']->getReadme($repository, $branch),
+                'readme'         => $app['util.repository']->getReadme($repo, $branch),
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('commitishPath', $app['util.routing']->getCommitishPathRegex())
+        })->assert('repo', '[\w-._]+')
+          ->assert('branch', '[\w-._]+')
+          ->assert('tree', '.+')
           ->bind('tree');
 
-        $route->post('{repo}/tree/{branch}/search', function (Request $request, $repo, $branch = '', $tree = '') use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
+        $route->post('{repo}/tree/{branch}/search', function(Request $request, $repo, $branch = '', $tree = '') use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
+
             if (!$branch) {
                 $branch = $repository->getHead();
             }
 
-            $query = $request->get('query');
-            $breadcrumbs = array(array('dir' => 'Search results for: ' . $query, 'path' => ''));
-            $results = $repository->searchTree($query, $branch);
+            $breadcrumbs = $app['util.view']->getBreadcrumbs($tree);
+            $results = $repository->searchTree($request->get('query'), $branch);
 
             return $app['twig']->render('search.twig', array(
                 'results'        => $results,
@@ -66,16 +65,23 @@ class TreeController implements ControllerProviderInterface
                 'branches'       => $repository->getBranches(),
                 'tags'           => $repository->getTags(),
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('branch', $app['util.routing']->getBranchRegex())
+        })->assert('repo', '[\w-._]+')
+          ->assert('branch', '[\w-._]+')
           ->bind('search');
 
+        $route->get('{repo}/{branch}/', function($repo, $branch) use ($app, $treeController) {
+            return $treeController($repo, $branch);
+        })->assert('repo', '[\w-._]+')
+          ->assert('branch', '[\w-._]+')
+          ->bind('branch');
 
-        # Intentionally before next statement, because order appears
-        # to be important, and the other statement got precedence previously.
+        $route->get('{repo}/', function($repo) use ($app, $treeController) {
+            return $treeController($repo);
+        })->assert('repo', '[\w-._]+')
+          ->bind('repository');
+
         $route->get('{repo}/{format}ball/{branch}', function($repo, $format, $branch) use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
-
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
             $tree = $repository->getBranchTree($branch);
 
             if (false === $tree) {
@@ -102,23 +108,10 @@ class TreeController implements ControllerProviderInterface
                 'Content-Transfer-Encoding' => 'binary',
             ));
         })->assert('format', '(zip|tar)')
-          ->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('branch', $app['util.routing']->getBranchRegex())
+          ->assert('repo', '[\w-._]+')
+          ->assert('branch', '[\w-._]+')
           ->bind('archive');
-
-
-        $route->get('{repo}/{branch}/', function($repo, $branch) use ($app, $treeController) {
-            return $treeController($repo, $branch);
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('branch', $app['util.routing']->getBranchRegex())
-          ->bind('branch');
-
-        $route->get('{repo}/', function($repo) use ($app, $treeController) {
-            return $treeController($repo);
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->bind('repository');
 
         return $route;
     }
 }
-

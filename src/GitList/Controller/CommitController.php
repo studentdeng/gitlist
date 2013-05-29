@@ -4,6 +4,8 @@ namespace GitList\Controller;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
+use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class CommitController implements ControllerProviderInterface
@@ -12,22 +14,11 @@ class CommitController implements ControllerProviderInterface
     {
         $route = $app['controllers_factory'];
 
-        $route->get('{repo}/commits/{commitishPath}', function ($repo, $commitishPath) use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
-
-            if ($commitishPath === null) {
-                $commitishPath = $repository->getHead();
-            }
-
-            list($branch, $file) = $app['util.routing']
-                ->parseCommitishPathParam($commitishPath, $repo);
-
-            list($branch, $file) = $app['util.repository']->extractRef($repository, $branch, $file);
-
-            $type = $file ? "$branch -- \"$file\"" : $branch;
+        $route->get('{repo}/commits/{branch}/{file}', function($repo, $branch, $file) use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
+            $type = $file ? "$branch -- $file" : $branch;
             $pager = $app['util.view']->getPager($app['request']->get('page'), $repository->getTotalCommits($type));
             $commits = $repository->getPaginatedCommits($type, $pager['current']);
-            $categorized = array();
 
             foreach ($commits as $commit) {
                 $date = $commit->getDate();
@@ -38,7 +29,6 @@ class CommitController implements ControllerProviderInterface
             $template = $app['request']->isXmlHttpRequest() ? 'commits_list.twig' : 'commits.twig';
 
             return $app['twig']->render($template, array(
-                'page'           => 'commits',
                 'pager'          => $pager,
                 'repo'           => $repo,
                 'branch'         => $branch,
@@ -47,17 +37,16 @@ class CommitController implements ControllerProviderInterface
                 'commits'        => $categorized,
                 'file'           => $file,
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('commitishPath', $app['util.routing']->getCommitishPathRegex())
-          ->value('commitishPath', null)
+        })->assert('repo', '[\w-._]+')
+          ->assert('branch', '[\w-._]+')
+          ->assert('file', '.+')
+          ->value('branch', 'master')
+          ->value('file', '')
           ->bind('commits');
 
-        $route->post('{repo}/commits/{branch}/search', function (Request $request, $repo, $branch = '') use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
-            $query = $request->get('query');
-
+        $route->post('{repo}/commits/search', function(Request $request, $repo) use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
             $commits = $repository->searchCommitLog($request->get('query'));
-            $categorized = array();
 
             foreach ($commits as $commit) {
                 $date = $commit->getDate();
@@ -67,40 +56,31 @@ class CommitController implements ControllerProviderInterface
 
             return $app['twig']->render('searchcommits.twig', array(
                 'repo'           => $repo,
-                'branch'         => $branch,
+                'branch'         => 'master',
                 'file'           => '',
                 'commits'        => $categorized,
                 'branches'       => $repository->getBranches(),
                 'tags'           => $repository->getTags(),
-                'query'          => $query
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('branch', $app['util.routing']->getBranchRegex())
+        })->assert('repo', '[\w-._]+')
           ->bind('searchcommits');
 
-        $route->get('{repo}/commit/{commit}', function ($repo, $commit) use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
+        $route->get('{repo}/commit/{commit}/', function($repo, $commit) use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
             $commit = $repository->getCommit($commit);
-            $branch = $repository->getHead();
 
             return $app['twig']->render('commit.twig', array(
-                'branch'         => $branch,
+                'branch'         => 'master',
                 'repo'           => $repo,
                 'commit'         => $commit,
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
+        })->assert('repo', '[\w-._]+')
           ->assert('commit', '[a-f0-9^]+')
           ->bind('commit');
 
-        $route->get('{repo}/blame/{commitishPath}', function ($repo, $commitishPath) use ($app) {
-            $repository = $app['git']->getRepository($app['git.repos'], $repo);
-
-            list($branch, $file) = $app['util.routing']
-                ->parseCommitishPathParam($commitishPath, $repo);
-
-            list($branch, $file) = $app['util.repository']->extractRef($repository, $branch, $file);
-
-            $blames = $repository->getBlame("$branch -- \"$file\"");
+        $route->get('{repo}/blame/{branch}/{file}', function($repo, $branch, $file) use ($app) {
+            $repository = $app['git']->getRepository($app['git.repos'] . $repo);
+            $blames = $repository->getBlame("$branch -- $file");
 
             return $app['twig']->render('blame.twig', array(
                 'file'           => $file,
@@ -110,11 +90,11 @@ class CommitController implements ControllerProviderInterface
                 'tags'           => $repository->getTags(),
                 'blames'         => $blames,
             ));
-        })->assert('repo', $app['util.routing']->getRepositoryRegex())
-          ->assert('commitishPath', $app['util.routing']->getCommitishPathRegex())
+        })->assert('repo', '[\w-._]+')
+          ->assert('file', '.+')
+          ->assert('branch', '[\w-._]+')
           ->bind('blame');
 
         return $route;
     }
 }
-

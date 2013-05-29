@@ -15,9 +15,8 @@ class Repository
         'cpp'      => 'clike',
         'm'        => 'clike',
         'mm'       => 'clike',
-        'ino'      => 'clike',
         'cs'       => 'text/x-csharp',
-        'java'     => 'text/x-java',
+        'java'     => 'java',
         'clj'      => 'clojure',
         'coffee'   => 'coffeescript',
         'css'      => 'css',
@@ -52,7 +51,6 @@ class Repository
         'r'        => 'r',
         'sh'       => 'shell',
         'ss'       => 'scheme',
-        'scala'    => 'text/x-scala',
         'scm'      => 'scheme',
         'sls'      => 'scheme',
         'sps'      => 'scheme',
@@ -93,13 +91,6 @@ class Repository
         'csproj'   => 'xml',
     );
 
-    protected static $binaryTypes = array(
-        'exe', 'com', 'so', 'la', 'o', 'dll', 'pyc',
-        'jpg', 'jpeg', 'bmp', 'gif', 'png', 'xmp', 'pcx', 'svgz', 'ttf', 'tiff', 'oet',
-        'gz', 'tar', 'rar', 'zip', '7z', 'jar', 'class',
-        'odt', 'ods', 'pdf', 'doc', 'docx', 'dot', 'xls', 'xlsx',
-    );
-
     public function __construct(Application $app)
     {
         $this->app = $app;
@@ -111,12 +102,12 @@ class Repository
      * The file type is used by CodeMirror, a Javascript-based IDE implemented in
      * GitList, to properly highlight the blob syntax (if it's a source-code)
      *
-     * @param  string $file File name
-     * @return mixed  File type
+     * @param string $file File name
+     * @return mixed File type
      */
     public function getFileType($file)
     {
-        if (($pos = strrpos($file, '.')) !== false) {
+        if (($pos = strrpos($file, '.')) !== FALSE) {
             $fileType = substr($file, $pos + 1);
         } else {
             return 'text';
@@ -135,38 +126,10 @@ class Repository
         return 'text';
     }
 
-    /**
-     * Returns whether the file is binary.
-     *
-     * @param string $file
-     *
-     * @return boolean
-     */
-    public function isBinary($file)
+    public function getReadme($repo, $branch = 'master')
     {
-        if (($pos = strrpos($file, '.')) !== false) {
-            $fileType = substr($file, $pos + 1);
-        } else {
-            return false;
-        }
-
-        if (in_array($fileType, self::$binaryTypes)) {
-            return true;
-        }
-
-        if (!empty($this->app['binary_filetypes']) && array_key_exists($fileType, $this->app['binary_filetypes'])) {
-            return $this->app['binary_filetypes'][$fileType];
-        }
-
-        return false;
-    }
-
-    public function getReadme($repository, $branch = null)
-    {
+        $repository = $this->app['git']->getRepository($this->app['git.repos'] . $repo);
         $files = $repository->getTree($branch)->output();
-        if ($branch === null) {
-           $branch = $repository->getHead();
-        }
 
         foreach ($files as $file) {
             if (preg_match('/^readme*/i', $file['name'])) {
@@ -179,44 +142,4 @@ class Repository
 
         return array();
     }
-
-    /**
-     * Returns an Array where the first value is the tree-ish and the second is the path
-     *
-     * @param  \GitList\Git\Repository $repository
-     * @param  string                  $branch
-     * @param  string                  $tree
-     * @return array
-     */
-    public function extractRef($repository, $branch = '', $tree = '')
-    {
-        $branch = trim($branch, '/');
-        $tree = trim($tree, '/');
-        $input = $branch . '/' . $tree;
-
-        // If the ref appears to be a SHA, just split the string
-        if (preg_match("/^([[:alnum:]]{40})(.+)/", $input, $matches)) {
-            $branch = $matches[1];
-        } else {
-            // Otherwise, attempt to detect the ref using a list of the project's branches and tags
-            $validRefs = array_merge((array) $repository->getBranches(), (array) $repository->getTags());
-            foreach ($validRefs as $key => $ref) {
-                if (!preg_match(sprintf("#^%s/#", preg_quote($ref, '#')), $input)) {
-                    unset($validRefs[$key]);
-                }
-            }
-
-            // No exact ref match, so just try our best
-            if (count($validRefs) > 1) {
-                preg_match('/([^\/]+)(.*)/', $input, $matches);
-                $branch = preg_replace('/^\/|\/$/', '', $matches[1]);
-            } else {
-                // Extract branch name
-                $branch = array_shift($validRefs);
-            }
-        }
-
-        return array($branch, $tree);
-    }
 }
-

@@ -1,0 +1,30 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2013-05-27 12:48:43 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:29:01 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:30:01 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:30:01 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:17 --> Severity: Notice  --> Undefined property: Account::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:22 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:22 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:25 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:25 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:31:25 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:32:25 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:32:25 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:33:04 --> Severity: Notice  --> Undefined property: Account::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:33:15 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 19:33:15 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:50:43 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:50:51 --> Severity: Notice  --> Undefined property: Account::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:50:58 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:50:58 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:51:39 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:51:39 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:51:39 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:03 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:03 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:03 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:29 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:29 --> Severity: Notice  --> Undefined property: Project::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236
+ERROR - 2013-05-27 22:52:29 --> Severity: Notice  --> Undefined property: Issues::$db /Library/WebServer/Documents/worklife/application/libraries/REST_Controller.php 236

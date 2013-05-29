@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sign in &middot; Work life</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Le styles -->
+        <link href="css/bootstrap.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+          <script src="../assets/js/html5shiv.js"></script>
+        <![endif]-->
+
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">
+    </head>
+
+    <body>
+
+        <div class="container">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <div class="row">
+                <input id ="usernameLabel" type="text" class="span4" placeholder="account address"></br>
+                <input id='passwordLabel' type="password" class="span4" placeholder="Password"></br>
+                <button class="btn btn-large btn-primary" onclick="submit()">Sign in</button>
+            </div>
+        </div> <!-- /container -->
+
+        <!-- Le javascript
+        ================================================== -->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" >
+                    //设置cookie
+                    function setCookie(name, value, seconds) {
+                        seconds = seconds || 0;   //seconds有值就直接赋值，没有为0，这个根php不一样。
+                        var expires = "";
+                        if (seconds != 0) {      //设置cookie生存时间
+                            var date = new Date();
+                            date.setTime(date.getTime() + (seconds * 1000));
+                            expires = "; expires=" + date.toGMTString();
+                        }
+                        document.cookie = name + "=" + escape(value) + expires + "; path=/";   //转码并赋值
+                    }
+
+                    function make_base_auth(user, password) {
+                        var tok = user + ':' + password;
+                        var hash = btoa(tok);
+                        return "Basic " + hash;
+                    }
+
+                    function submit() {
+                        var username = $('#usernameLabel').val();
+                        var password = $('#passwordLabel').val();
+
+                        var url = 'http://192.168.1.201/worklife/index.php/api/account/login';
+                        $.ajax({
+                            url: url,
+                            type: "post",
+                            beforeSend: function(xhr) {
+                                xhr.setRequestHeader('Authorization', make_base_auth(username, password));
+                            },
+                            async: false,
+                            data: {},
+                            dataType: "json",
+                            success: function(data) {
+                                var username = data.username;
+                                var password = data.password;
+                                var nickname = data.nickname;
+
+                                setCookie("username", username, 3600 * 3);
+                                setCookie("password", password, 3600 * 3);
+                                setCookie("nickname", nickname, 3600 * 3);
+
+                                window.location.href = "http://192.168.1.201/gitlist";
+                            },
+                            error: function(data) {
+                                console.log(data);
+                                alert(data.message);
+                            }
+
+                        });
+                    }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,107 @@
+{% extends 'layout_page.twig' %}
+
+{% set page = 'issues' %}
+
+{% block title %}GitList{% endblock %}
+
+{% block content %}
+<div class="btn-group">
+
+    {% if showstate == 0 %}
+    <button class="btn">Opened</button>
+    {% endif %}
+
+    {% if showstate == 1 %}
+    <button class="btn">Closed</button>
+    {% endif %}
+
+    <button class="btn dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+        <!-- dropdown menu links -->
+        <li><a href="#" id="showStateAction-2">Opened</a></li>
+        <li><a href="#" id="showStateAction-3">Closed</a></li>
+    </ul>
+</div>
+<input id="issueInputText" class = "span12" type="text" placeholder="Create issues something…" style="margin-top: 10px; margin-right: 20px;">
+<button style="margin-bottom: 10px" class="btn btn-success" onClick="onCreate({{project.id}})">Create Issue</button>
+    {% include 'issues_list.twig' %}
+<hr />
+
+{% block javascripts %}
+<script type="text/javascript" >
+    jQuery("#showStateAction-2").click(function(e) {
+        
+        window.location.href = location.protocol + '//' + location.host + location.pathname + '?state=0';
+        
+        e.preventDefault();
+    });
+    
+    jQuery("#showStateAction-3").click(function(e) {
+        
+        window.location.href = location.protocol + '//' + location.host + location.pathname + '?state=1';
+        
+        e.preventDefault();
+    });
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');    //把cookie分割成组
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];                      //取得字符串
+            while (c.charAt(0) == ' ') {          //判断一下字符串有没有前导空格
+                c = c.substring(1, c.length);      //有的话，从第二位开始取
+            }
+            if (c.indexOf(nameEQ) == 0) {       //如果含有我们要的name
+                return unescape(c.substring(nameEQ.length, c.length));    //解码并截取我们要值
+            }
+        }
+        return false;
+    }
+
+    function make_base_auth(user, password) {
+        var tok = user + ':' + password;
+        var hash = btoa(tok);
+        return "Basic " + hash;
+    }
+
+    function onCreate(projectId)
+    {
+        var text = $('#issueInputText').val();
+        if (text.length == 0)
+        {
+            alert('input empty');
+            return;
+        }
+
+        var username = getCookie('username');
+        var password = getCookie('password');
+
+        $.ajax({
+            url: "http://192.168.1.201/worklife/index.php/api/issues/create",
+            type: "post",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', make_base_auth(username, password));
+            },
+            data: {
+                text: text,
+                project_id: projectId
+            },
+            success: function(data) {
+                location.reload();
+            },
+            error: function(xhr, data) {
+                if (xhr.status == 401)
+                {
+                    window.location.href = "http://192.168.1.201/gitlist/login.html";
+                }
+
+                alert('failed');
+            }
+        });
+    }
+    </script>
+{% endblock %}
+
+{% endblock %}

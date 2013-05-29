@@ -20,23 +20,22 @@ $(function () {
         });
     }
 
-    if ($('#md-content').length) {
+    if ($('#readme-content').length) {
         var converter = new Showdown.converter();
-        $('#md-content').html(converter.makeHtml($('#md-content').text()));
+        $('#readme-content').html(converter.makeHtml($('#readme-content').text()));
     }
 
     function paginate() {
         var $pager = $('.pager');
-
         $pager.find('.next a').one('click', function (e) {
             e.preventDefault();
+            $(this).css('pointer-events', 'none');
             $.get(this.href, function (html) {
                 $pager.after(html);
                 $pager.remove();
                 paginate();
             });
         });
-
         $pager.find('.previous').remove();
     }
     paginate();

@@ -6,25 +6,13 @@ class Config
 {
     protected $data;
 
-    public static function fromFile($file)
+    public function __construct($file)
     {
         if (!file_exists($file)) {
-            die(sprintf('Please, create the %1$s file.', $file));
+            die("Please, create the config.ini file.");
         }
 
-        $data = parse_ini_file($file, true);
-        
-        # Ensure that repositories item is an array
-        if (!is_array($data['git']['repositories'])) {
-            $data['git']['repositories'] = array($data['git']['repositories']);
-        }
-
-        return new static($data);
-    }
-
-    public function __construct($data)
-    {
-        $this->data = $data;
+        $this->data = parse_ini_file('config.ini', true);
         $this->validateOptions();
     }
 
@@ -57,30 +45,8 @@ class Config
 
     protected function validateOptions()
     {
-        $repositories = $this->get('git', 'repositories');
-
-        if (!is_array($repositories)) {
-            return;
-        }
-
-        $atLeastOneOk = false;
-        $atLeastOneWrong = false;
-
-        foreach ($repositories as $directory) {
-            if (!$directory || !is_dir($directory)) {
-                $atLeastOneWrong = true;
-            } else {
-                $atLeastOneOk = true;
-            }
-        }
-
-        if (!$atLeastOneOk) {
-            die("Please, edit the config file and provide your repositories directory");
-        }
-
-        if ($atLeastOneWrong) {
-            die("One or more of the supplied repository paths appears to be wrong. Please, check the config file");
+        if (!$this->get('git', 'repositories') || !is_dir($this->get('git', 'repositories'))) {
+            die("Please, edit the config.ini file and provide your repositories directory");
         }
     }
 }
-

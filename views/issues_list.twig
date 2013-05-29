@@ -1,0 +1,21 @@
+{% for date, issue in issues %}
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th colspan="3">{{ date | date("F j, Y") }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in issue %}
+            <tr>
+                <td width="5%"><img src="{{item.user.avatar}}" /></td>
+                <td width="95%">
+                    <span class="pull-right"><a class="btn btn-small" href="issue/{{item.id}}"><i class="icon-list-alt"></i> Enter</a></span>
+                    <h4>{{ item.text }}</h4>
+                    <span><a href="mailto:{{ item.user.email }}">{{ item.user.nickname }}</a> created at  {{ item.created | date('d/m/Y \\a\\t H:i:s') }}</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
