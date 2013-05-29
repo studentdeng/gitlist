@@ -31,7 +31,7 @@
             <div class="row">
                 <input id ="usernameLabel" type="text" class="span4" placeholder="account address"></br>
                 <input id='passwordLabel' type="password" class="span4" placeholder="Password"></br>
-                <button class="btn btn-large btn-primary" onclick="submit()">Sign in</button>
+                <button class="btn btn-large btn-primary" onclick="userLoginSubmit()">Sign in</button>
             </div>
         </div> <!-- /container -->
 
@@ -39,57 +39,6 @@
         ================================================== -->
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" >
-                    //设置cookie
-                    function setCookie(name, value, seconds) {
-                        seconds = seconds || 0;   //seconds有值就直接赋值，没有为0，这个根php不一样。
-                        var expires = "";
-                        if (seconds != 0) {      //设置cookie生存时间
-                            var date = new Date();
-                            date.setTime(date.getTime() + (seconds * 1000));
-                            expires = "; expires=" + date.toGMTString();
-                        }
-                        document.cookie = name + "=" + escape(value) + expires + "; path=/";   //转码并赋值
-                    }
-
-                    function make_base_auth(user, password) {
-                        var tok = user + ':' + password;
-                        var hash = btoa(tok);
-                        return "Basic " + hash;
-                    }
-
-                    function submit() {
-                        var username = $('#usernameLabel').val();
-                        var password = $('#passwordLabel').val();
-
-                        var url = 'http://192.168.1.201/worklife/index.php/api/account/login';
-                        $.ajax({
-                            url: url,
-                            type: "post",
-                            beforeSend: function(xhr) {
-                                xhr.setRequestHeader('Authorization', make_base_auth(username, password));
-                            },
-                            async: false,
-                            data: {},
-                            dataType: "json",
-                            success: function(data) {
-                                var username = data.username;
-                                var password = data.password;
-                                var nickname = data.nickname;
-
-                                setCookie("username", username, 3600 * 3);
-                                setCookie("password", password, 3600 * 3);
-                                setCookie("nickname", nickname, 3600 * 3);
-
-                                window.location.href = "http://192.168.1.201/gitlist";
-                            },
-                            error: function(data) {
-                                console.log(data);
-                                alert(data.message);
-                            }
-
-                        });
-                    }
-        </script>
+        <script src="/gitlist/js/worklife.js"></script>
     </body>
 </html>

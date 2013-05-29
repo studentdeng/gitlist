@@ -23,7 +23,7 @@ class IssueController implements ControllerProviderInterface
             
             //according source_path find project info
             $client2 = new HTTPClient2();
-            $urlProject = "http://localhost/worklife/index.php/api/project";
+            $urlProject = "http://localhost/gitlist/worklife/index.php/api/project";
             $projectData = $client2->get($urlProject, array('source_path'=>$sourcePath));
 			$httpStatusCode = $client2->http_code;
 			if ($httpStatusCode != 200)
@@ -41,7 +41,7 @@ class IssueController implements ControllerProviderInterface
 			}
             
             $state = $_GET['state'];
-            $url = "http://localhost/worklife/index.php/api/issues/list?project_id=".$projectData['id'] . "&state=".$state;
+            $url = "http://localhost/gitlist/worklife/index.php/api/issues/list?project_id=".$projectData['id'] . "&state=".$state;
             
             //use project_id find issues list
             $client = new HTTPClient2();
@@ -85,13 +85,13 @@ class IssueController implements ControllerProviderInterface
             $repository = $app['git']->getRepository($app['git.repos'] . $repo);
             $authors = $repository->getAuthorStatistics();
             
-            $url2 = 'http://localhost/worklife/index.php/api/issues?id='.$commitId;
+            $url2 = 'http://localhost/gitlist/worklife/index.php/api/issues?id='.$commitId;
             $client2 = new HTTPClient2();
             $response2 = $client2->get($url2, array());
             
             $issue = (object)$response2;
             
-            $url = 'http://localhost/worklife/index.php/api/issues/reply_list?id='.$commitId;
+            $url = 'http://localhost/gitlist/worklife/index.php/api/issues/reply_list?id='.$commitId;
             $client = new HTTPClient2();
             $response = $client->get($url, array());
             $resultArray = $response['list'];

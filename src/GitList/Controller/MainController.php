@@ -60,7 +60,7 @@ class MainController implements ControllerProviderInterface {
                     $password = $_POST['password'];
 
                     $client = new HTTPClient2();
-                    $url = "http://localhost/worklife/index.php/api/account";
+                    $url = "http://localhost/gitlist/worklife/index.php/api/account";
 
                     $headers = array();
                     $info = $username . ":" . $password;
